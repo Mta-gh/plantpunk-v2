@@ -1,0 +1,4 @@
+name: plantpunk-api
+recipe: laravel
+config:
+  webroot: /public
