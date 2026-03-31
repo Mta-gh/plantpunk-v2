@@ -74,6 +74,7 @@ A plant encyclopedia that catalogs houseplants with their care requirements, hel
 
 ## v2 Scope
 
+- **Care sheets** - @react-pdf/renderer
 - **Ailments** — shared ailment model with per-plant overrides for symptoms/treatment
   - **Ailment** — name, slug, description, default symptoms, default treatment, category (enum: watering/light/pests/disease/nutrient), image
   - **PlantAilment** — pivot with optional custom_symptoms, custom_treatment, and image overrides
@@ -91,3 +92,10 @@ A plant encyclopedia that catalogs houseplants with their care requirements, hel
 
 ### Tech Decisions
 - **TanStack Query** — not needed for v1. Current server-side fetching in Next.js server components is simpler and more performant. Reconsider if the app becomes heavily interactive (user accounts, mutations, real-time data)
+
+### API 
+- **trefle.io** https://trefle.io/
+
+### Frontend animations
+- https://github.com/camwiegert/baffle?tab=readme-ov-file
+- https://www.use-scramble.dev/
