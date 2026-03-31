@@ -4,13 +4,46 @@ A plant encyclopedia that catalogs houseplants with their care requirements, hel
 
 ## Project Structure
 
-- `plantpunk-api/` — Laravel 12 + Filament 5 backend (REST API + admin panel)
-- `plantpunk-web/` — Next.js 16 frontend
+- `plantpunk-web/` — Next.js 15 + Payload CMS (frontend + admin + API)
 
 ## Tech Stack
 
-**Backend:** Laravel 12, Filament 5, MySQL, Lando
-**Frontend:** Next.js 16, TypeScript, SCSS (BEM + CSS Modules)
+**Frontend:** Next.js 15, TypeScript, SCSS (BEM + CSS Modules)
+**CMS:** Payload CMS 3, PostgreSQL
+**Future:** Laravel worker service for background jobs (care reminders, notifications, Trefle sync)
+
+## Getting Started
+
+### Prerequisites
+- Node.js >= 20
+- Docker
+
+### Setup
+
+```bash
+cd plantpunk-web
+
+# Start the database
+docker compose up -d
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
+
+App runs at `http://localhost:3000`, admin panel at `http://localhost:3000/admin`.
+
+### Database
+
+```bash
+# Export
+docker compose exec database pg_dump -U postgres plantpunk > backup.sql
+
+# Import
+docker compose exec -T database psql -U postgres plantpunk < backup.sql
+```
 
 ## v1 Scope
 
@@ -20,15 +53,8 @@ A plant encyclopedia that catalogs houseplants with their care requirements, hel
 - **Tag** — traits like trailing, variegated, pet-safe — many-to-many with Plant
 - **Enums** — Light, Watering, Humidity, Difficulty
 
-### Backend (API + Admin)
-- Filament admin panel for managing plants, categories, and tags
-- Public REST API (`/api/v1/`) for the frontend
-- Custom login with username or email
-- Custom theme (Space Grotesk font)
-
 ### Frontend
 - Server-side rendered plant listing and detail pages
-- Header with app name and version fetched from API
 - SCSS with BEM naming + CSS Modules for scoped styles
 - Global utility classes (`dna/`) for layout, responsive grid via `_grid.scss`
 
@@ -78,20 +104,14 @@ A plant encyclopedia that catalogs houseplants with their care requirements, hel
 - **Ailments** — shared ailment model with per-plant overrides for symptoms/treatment
   - **Ailment** — name, slug, description, default symptoms, default treatment, category (enum: watering/light/pests/disease/nutrient), image
   - **PlantAilment** — pivot with optional custom_symptoms, custom_treatment, and image overrides
-- Spatie Media Library for multiple images per plant (gallery, ailment photos)
+- Multiple images per plant (gallery, ailment photos)
 - Search and filtering (by light, difficulty, toxicity, tags, etc.)
-  - Client-side filtering with `useState` + `.filter()` — plant collection is small enough to filter in-browser without extra API calls
-  - No need for TanStack Query or server-side search at this stage
 - User accounts and plant collections ("My Plants")
-- Care reminders and watering schedules
+- Care reminders and watering schedules (via Laravel worker service)
 - Propagation guides
 - Seasonal care tips
 - SEO and Open Graph metadata
-- API restructure: group characteristics into nested object (light, watering, humidity, difficulty, substrate, temperature, toxicity)
-- **PWA** — Progressive Web App (installable, no app store fees) — [Next.js PWA guide](https://nextjs.org/docs/app/guides/progressive-web-apps)
-
-### Tech Decisions
-- **TanStack Query** — not needed for v1. Current server-side fetching in Next.js server components is simpler and more performant. Reconsider if the app becomes heavily interactive (user accounts, mutations, real-time data)
+- **PWA** — Progressive Web App (installable, no app store fees)
 
 ### API 
 - **trefle.io** https://trefle.io/
