@@ -1,0 +1,31 @@
+{
+  "name": "plantpunk-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.80.0",
+    "@payloadcms/next": "^3.80.0",
+    "@payloadcms/richtext-lexical": "^3.80.0",
+    "graphql": "^16.13.2",
+    "next": "15.4",
+    "payload": "^3.80.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "sass": "^1.97.3",
+    "typescript": "^5"
+  }
+}

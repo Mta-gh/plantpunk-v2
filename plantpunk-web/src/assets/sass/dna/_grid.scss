@@ -1,0 +1,75 @@
+@use 'variables' as *;
+
+$breakpoints: (
+  'sm': 36rem,   // 576px
+  'md': 48rem,   // 768px
+  'lg': 64rem,   // 1024px
+  'xl': 80rem,   // 1280px
+);
+
+$container-sizes: (
+  'sm': var(--container-sm),
+  'md': var(--container-md),
+  'lg': var(--container-lg),
+  'xl': var(--container-xl),
+  'ultra': var(--container-ultra),
+);
+
+// Responsive grid: 1 → 2 → 6 → 12 → 24 columns
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @media (min-width: map-get($breakpoints, 'sm')) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: map-get($breakpoints, 'md')) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @media (min-width: map-get($breakpoints, 'lg')) {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  @media (min-width: map-get($breakpoints, 'xl')) {
+    grid-template-columns: repeat(24, 1fr);
+  }
+
+  @each $name, $width in $container-sizes {
+    &--#{$name} {
+      @media (min-width: map-get($breakpoints, 'xl')) {
+        grid-template-columns:
+          [full-start] minmax(calc((100% - #{$width}) / 2), 1fr)
+          [main-start] repeat(24, [col] 1fr)
+          [main-end] minmax(calc((100% - #{$width}) / 2), 1fr)
+          [full-end];
+      }
+    }
+  }
+}
+
+// Column placement utilities
+@for $i from 1 through 26 {
+  .col-start-#{$i} { grid-column-start: #{$i}; }
+  .col-end-#{$i}   { grid-column-end: #{$i}; }
+}
+
+// Column span utilities
+@for $i from 1 through 24 {
+  .col-span-#{$i} { grid-column: span #{$i}; }
+}
+
+// Responsive variants (use dash prefix: sm-col-span-12, lg-col-start-3)
+@each $name, $width in $breakpoints {
+  @media (min-width: #{$width}) {
+    @for $i from 1 through 24 {
+      .#{$name}-col-span-#{$i} { grid-column: span #{$i}; }
+    }
+
+    @for $i from 1 through 26 {
+      .#{$name}-col-start-#{$i} { grid-column-start: #{$i}; }
+      .#{$name}-col-end-#{$i}   { grid-column-end: #{$i}; }
+    }
+  }
+}

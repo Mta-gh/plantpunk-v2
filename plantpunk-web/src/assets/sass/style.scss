@@ -1,0 +1,69 @@
+@use './dna/text' as *;
+@use './dna/variables' as *;
+@use './dna/functions' as *;
+@use './dna/grid';
+
+:root {
+  --aqua: aqua;
+  --grey: #F8F8F9;
+
+  --background: var(--grey);
+  --foreground: #171717;
+
+  --container-ultra: 192rem;
+  --container-xl: 136rem;
+  --container-lg: 110rem;
+  --container-md: 86rem;
+  --container-sm: 70rem;
+
+  --spacing-xxs: 1.2rem;
+  --spacing-xs: 1.8rem;
+  --spacing-sm: 2.4rem;
+  --spacing-md: 3.2rem;
+  --spacing-lg: 5.2rem;
+  --spacing-xl: 6.4rem;
+  --spacing-xxl: 8.2rem;
+  --spacing-xxxl: 10rem;
+}
+
+html {
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}

@@ -1,0 +1,18 @@
+// CSS custom properties — applied globally via style.scss
+// This file is safe to @use in .module.scss files
+
+// SCSS variables (for use in calculations/mixins)
+$container-ultra: 192rem;
+$container-xl: 136rem;
+$container-lg: 110rem;
+$container-md: 86rem;
+$container-sm: 70rem;
+
+$spacing-xxs: 1.2rem;
+$spacing-xs: 1.8rem;
+$spacing-sm: 2.4rem;
+$spacing-md: 3.2rem;
+$spacing-lg: 5.2rem;
+$spacing-xl: 6.4rem;
+$spacing-xxl: 8.2rem;
+$spacing-xxxl: 10rem;

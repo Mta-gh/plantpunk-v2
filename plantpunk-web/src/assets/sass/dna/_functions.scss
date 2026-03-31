@@ -1,0 +1,31 @@
+@use 'sass:math';
+
+@function z($name) {
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+  } @else {
+    @warn 'There is no item "#{$name}" in this list; Choose one of: #{$z-indexes}';
+    @return null;
+  }
+}
+
+$default-min-bp: 32rem;
+$default-max-bp: 192rem;
+
+@function fluid(
+  $min-size,
+  $max-size,
+  $min-breakpoint: $default-min-bp,
+  $max-breakpoint: $default-max-bp,
+  $unit: vw
+) {
+  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  $slope-to-unit: $slope * 100;
+  $intercept: $min-size - $slope * $min-breakpoint;
+
+  @return clamp(
+    #{$min-size},
+    #{$slope-to-unit}#{$unit} + #{$intercept},
+    #{$max-size}
+  );
+}
