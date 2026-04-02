@@ -1,29 +1,39 @@
-import { Plant, Category, Tag } from '@/types/api';
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
-export async function fetchAPI(endpoint: string) {
-  const res = await fetch(`${process.env.API_URL}/${endpoint}`, {
-    next: { revalidate: 3600 },
-  });
-  if (!res.ok) throw new Error('API error');
-  return res.json();
+export async function getPlants() {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'plants',
+    limit: 100,
+  })
+  return result.docs
 }
 
-export async function getPlants(): Promise<Plant[]> {
-  const res = await fetchAPI('plants');
-  return res.data;
+export async function getPlant(slug: string) {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'plants',
+    where: { slug: { equals: slug } },
+    limit: 1,
+  })
+  return result.docs[0] || null
 }
 
-export async function getPlant(slug: string): Promise<Plant> {
-  const res = await fetchAPI(`plants/${slug}`);
-  return res.data;
+export async function getCategories() {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'categories',
+    limit: 100,
+  })
+  return result.docs
 }
 
-export async function getCategories(): Promise<Category[]> {
-  const res = await fetchAPI('categories');
-  return res.data;
-}
-
-export async function getTags(): Promise<Tag[]> {
-  const res = await fetchAPI('tags');
-  return res.data;
+export async function getTags() {
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'tags',
+    limit: 100,
+  })
+  return result.docs
 }

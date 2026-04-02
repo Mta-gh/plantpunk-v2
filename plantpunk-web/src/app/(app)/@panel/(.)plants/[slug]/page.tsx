@@ -5,9 +5,11 @@ export default async function PlantPanel({ params }: { params: Promise<{ slug: s
   const { slug } = await params;
   const plant = await getPlant(slug);
 
+  if (!plant) return null;
+
   return (
     <SlidePanel>
-      {plant.name}
+      {plant.common_name}
     </SlidePanel>
   );
 }

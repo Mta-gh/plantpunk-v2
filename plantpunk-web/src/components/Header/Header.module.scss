@@ -8,12 +8,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .8rem var(--spacing-xxs);
+  padding: var(--spacing-xxs);
   width: 100%;
 
   &__logo {
-    font-weight: 700;
-    font-size: 1.25rem;
+
+    h1 {
+      font-weight: 700;
+      line-height: 1;
+    }
+
     text-decoration: none;
     color: inherit;
   }
@@ -26,9 +30,11 @@
 
 
   &__title {
-    background: #F8F8F9;
+    background: #f8f9f8;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 1px 1px 3px #fffc, -2px -2px 1px #0000001a;
+    // text-shadow: 1px 1px 3px #fffc, -2px -2px 1px #0000001a;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8), -2px -2px 1px #2d84021a;
+
   }
 }

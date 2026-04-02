@@ -13,6 +13,7 @@ export const Plants: CollectionConfig = {
         components: {
           Field: '/components/admin/TrefleSearch#TrefleSearch',
         },
+        disableListColumn: true,
       },
     },
     {
@@ -66,9 +67,25 @@ export const Plants: CollectionConfig = {
       },
     },
     {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'gallery',
+      type: 'array',
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'caption',
+          type: 'text',
+        },
+        {
+          name: 'is_cover',
+          type: 'checkbox',
+          defaultValue: false,
+        },
+      ],
     },
     {
       name: 'description',
